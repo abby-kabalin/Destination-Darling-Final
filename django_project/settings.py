@@ -30,7 +30,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = ["destination-darling.fly.dev", "localhost", "127.0.0.1"]
-CSRF_TRUSTED_ORIGINS = ["https://destinatino-darlingf.fly.dev"]
+CSRF_TRUSTED_ORIGINS = ["https://destination-darling.fly.dev"]
 
 
 # Application definition
