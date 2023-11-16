@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Destinations{% endblock title %}
+{% block content %}
+{% for destination in destination_list %}
+<div class="card">
+    <div class="card-header">
+        <span class="fw-bold">
+            <a href="{{ destinations.get_absolute_url }}">{{ destination.location }}</a>
+        </span> &middot;
+        <span class="text-muted">by {{ destination.author }} |
+        {{ destination.date }}</span>
+    </div>
+    <div class="card-body">
+        {{ destination.details }}
+    </div>
+    <div class="card-footer text-center text-muted">
+        <a href="{% url 'destination_edit' destination.pk %}">Edit</a>
+        <a href="{% url 'destination_delete' destination.pk %}">Delete</a>
+    </div>
+</div>
+<br />
+{% endfor %}
+{% endblock content %}
+    
