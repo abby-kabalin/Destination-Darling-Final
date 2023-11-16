@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="destination-entry">
+    <h2>{{ destination.location }}</h2>
+    <p>by {{ destination.author }} | {{ destination.date }}</p>
+    <p>{{ destination.details }}</p>
+</div>
+<div>
+    <p><a href="{% url 'destination_edit'  destination.pk %}">Edit</a>
+      <a href="{% url 'destination_delete' destination.pk %}">Delete</a>
+    </p>
+    <p>Back to <a href="{% url 'destination_list' %}">All Destinations</a>.</p>
+</div>
+{% endblock content %}
