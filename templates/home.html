@@ -8,6 +8,7 @@
 <p>Welcome back, {{ user.username }}!</p>
 <p>Status: {{ user.status }}</p>
 <p><a href="{% url 'logout' %}">Log Out</a></p>
+<p><a class="btn btn-primary btn-lg" href="{% url 'destination_list' %}" role="button">View all destinations</a></p>
 {% else %}
 <p>Welcome to Destination Darling!</p>
 <p><a href="{% url 'signup' %}">Sign up</a> today to start planning your next trip!</p>
