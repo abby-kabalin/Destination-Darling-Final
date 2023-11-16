@@ -8,17 +8,18 @@
             <a href="{{ destinations.get_absolute_url }}">{{ destination.location }}</a>
         </span> &middot;
         <span class="text-muted">by {{ destination.author }} |
-        {{ destination.date }}</span>
+            {{ destination.date }}</span>
     </div>
     <div class="card-body">
         {{ destination.details }}
     </div>
     <div class="card-footer text-center text-muted">
+        {% if destination.author.pk == request.user.pk %}
         <a href="{% url 'destination_edit' destination.pk %}">Edit</a>
         <a href="{% url 'destination_delete' destination.pk %}">Delete</a>
+        {% endif %}
     </div>
 </div>
 <br />
 {% endfor %}
 {% endblock content %}
-    
