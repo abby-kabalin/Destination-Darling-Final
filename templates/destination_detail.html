@@ -1,10 +1,28 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 {% block content %}
 <div class="destination-entry">
   <h2>{{ destination.location }}</h2>
   <p>by {{ destination.author }} | {{ destination.date }}</p>
   <p>{{ destination.details }}</p>
 </div>
+
+<hr>
+<h4>Attractions at {{ destination.location }}</h4>
+{% for attraction in destination.attraction_set.all %}
+<p>{{ attraction.attraction }} &middot; {{ attraction.description }}</p>
+{% endfor %}
+<hr>
+
+
+<h4>Add an attraction</h4>
+<form action="" method="post">{% csrf_token %}
+  {{ form|crispy }}
+  <button class="btn btn-success ml-2" type="submit">Save</button>
+</form>
+
+
 <div>
   {% if destination.author.pk == request.user.pk %}
   <p><a href="{% url 'destination_edit'  destination.pk %}">Edit</a>
