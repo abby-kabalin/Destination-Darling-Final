@@ -18,7 +18,7 @@ class CommentGet(DetailView):
         context["form"] = DestCommentForm()
         return context
 
-class CommentPost(SingleObjectMixin, FormView):
+
     model = Destination
     form_class = DestCommentForm
     template_name = "destination_detail.html"
@@ -37,7 +37,7 @@ class CommentPost(SingleObjectMixin, FormView):
     def get_success_url(self):
         destination = self.object
         return reverse("destination_detail", kwargs={"pk": destination.pk})
-        
+
 
 class DestinationDetailView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -52,6 +52,7 @@ class DestinationDetailView(LoginRequiredMixin, View):
 class DestinationListView(LoginRequiredMixin, ListView):
     model = Destination
     template_name = "destination_list.html"
+
 
 
 class DestinationUpdateView(LoginRequiredMixin, UpdateView):
