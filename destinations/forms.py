@@ -1,16 +1,5 @@
 from django import forms
-from .models import Attraction, Destination_Comment
-
-class AttractionForm(forms.ModelForm):
-    class Meta:
-        model = Attraction
-        fields = (
-            "attraction",
-            "description",
-            "rating",
-            "latitude",
-            "longitude",
-        )
+from .models import Destination_Comment
 
 class DestCommentForm(forms.ModelForm):
     class Meta:
