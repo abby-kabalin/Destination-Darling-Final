@@ -1,29 +1,26 @@
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import View
 from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
+
+from .forms import DestCommentForm
 from .models import Destination
-from .forms import AttractionForm, DestCommentForm
 
 
-class AttractionGet(DetailView):
+class CommentGet(DetailView):
     model = Destination
     template_name = "destination_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form"] = AttractionForm()
+        context["form"] = DestCommentForm()
         return context
 
 
-class AttractionPost(SingleObjectMixin, FormView):
     model = Destination
-    form_class = AttractionForm
+    form_class = DestCommentForm
     template_name = "destination_detail.html"
 
     def post(self, request, *args, **kwargs):
@@ -31,10 +28,10 @@ class AttractionPost(SingleObjectMixin, FormView):
         return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
-        attraction = form.save(commit=False)
-        attraction.location = self.object
-        attraction.author = self.request.user
-        attraction.save()
+        destination_comment = form.save(commit=False)
+        destination_comment.location = self.object
+        destination_comment.author = self.request.user
+        destination_comment.save()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -44,40 +41,21 @@ class AttractionPost(SingleObjectMixin, FormView):
 
 class DestinationDetailView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        view = AttractionGet.as_view()
+        view = CommentGet.as_view()
         return view(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        view = AttractionPost.as_view()
+        view = CommentPost.as_view()
         return view(request, *args, **kwargs)
 
 
-# Create your views here.
-class DestCommentGet(LoginRequiredMixin, ListView):
+class DestinationListView(LoginRequiredMixin, ListView):
     model = Destination
     template_name = "destination_list.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["form"] = DestCommentForm()
-        return context
 
 
-class DestCommentPost(SingleObjectMixin, FormView):
-    pass
-
-
-class DestinationListView(LoginRequiredMixin, View):
-    def get(self, request, *args, **kwargs):
-        view = DestCommentGet.as_view()
-        return view(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        view = DestCommentPost.as_view()
-        return view(request, *args, **kwargs)
-
-
-class DestinationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class DestinationUpdateView(LoginRequiredMixin, UpdateView):
     model = Destination
     fields = (
         "location",
@@ -113,3 +91,4 @@ class DestinationCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
