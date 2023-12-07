@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class Destination(models.Model):
-    location = models.CharField(max_length=255, primary_key = True)
+    location = models.CharField(max_length=255, primary_key=True)
     details = models.TextField()
     country = models.CharField(max_length=50)
     date = models.DateTimeField(auto_now_add=True)
@@ -19,6 +19,7 @@ class Destination(models.Model):
     def get_absolute_url(self):
         return reverse("destination_detail", kwargs={"pk": self.pk})
 
+
 class Attraction(models.Model):
     location = models.ForeignKey(Destination, on_delete=models.CASCADE)
     attraction = models.CharField(max_length=100, primary_key=True)
@@ -28,7 +29,7 @@ class Attraction(models.Model):
     longitude = models.FloatField(max_length=10)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete = models.CASCADE,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):
@@ -45,7 +46,6 @@ class Destination_Comment(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    
 
     def __str__(self):
         return self.comment

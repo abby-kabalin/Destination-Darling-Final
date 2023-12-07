@@ -21929,6 +21929,7 @@ iframe {
   left: 0;
   background-size: cover;
   background-position: center;
+  background-image: url(../img/hero/hero-bg.svg);
   overflow: hidden;
   will-change: transform, opacity, filter;
   -webkit-backface-visibility: hidden;

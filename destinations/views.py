@@ -20,6 +20,7 @@ class AttractionGet(DetailView):
         context["form"] = AttractionForm()
         return context
 
+
 class AttractionPost(SingleObjectMixin, FormView):
     model = Destination
     form_class = AttractionForm
@@ -39,7 +40,7 @@ class AttractionPost(SingleObjectMixin, FormView):
     def get_success_url(self):
         destination = self.object
         return reverse("destination_detail", kwargs={"pk": destination.pk})
-    
+
 
 class DestinationDetailView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -60,6 +61,7 @@ class DestCommentGet(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["form"] = DestCommentForm()
         return context
+
 
 class DestCommentPost(SingleObjectMixin, FormView):
     pass
