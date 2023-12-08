@@ -23,6 +23,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("destinations/", include("destinations.urls")),
+    path("attractions/", include("attractions.urls")),
     path("", include("pages.urls")),
 ]
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

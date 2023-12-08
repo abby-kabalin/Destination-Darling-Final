@@ -9,44 +9,44 @@ from django.views.generic.edit import (
     UpdateView, DeleteView, CreateView
 )
 from django.urls import reverse_lazy, reverse
+from .models import Attraction
+from .forms import AttractionCommentForm
 
-from .forms import DestCommentForm
-from .models import Destination
-
-class DestinationListView(LoginRequiredMixin, ListView):
-    model = Destination
-    template_name = "destination_list.html"
+class AttractionListView(LoginRequiredMixin, ListView):
+    model = Attraction
+    template_name = "attraction_list.html"
 
 class CommentGet(DetailView):
-    model = Destination
-    template_name = "destination_detail.html"
+    model = Attraction
+    template_name = "attraction_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form"] = DestCommentForm()
+        context["form"] = AttractionCommentForm()
         return context
 
 class CommentPost(SingleObjectMixin, FormView):
-    model = Destination
-    form_class = DestCommentForm
-    template_name = "destination_detail.html"
+    model = Attraction
+    form_class = AttractionCommentForm
+    template_name = "attraction_detail.html"
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().post(request, *args, **kwargs)
-
+    
     def form_valid(self, form):
         comment = form.save(commit=False)
-        comment.location = self.object
+        comment.attraction = self.object
         comment.author = self.request.user
         comment.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        location = self.object
-        return reverse("destination_detail", kwargs={"pk": location.pk})
+        attraction = self.object
+        return reverse("attraction_detail", kwargs={"pk": attraction.pk})
+        
 
-class DestinationDetailView(LoginRequiredMixin, View):
+class AttractionDetailView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         view = CommentGet.as_view()
         return view(request, *args, **kwargs)
@@ -55,40 +55,42 @@ class DestinationDetailView(LoginRequiredMixin, View):
         view = CommentPost.as_view()
         return view(request, *args, **kwargs)
 
-class DestinationUpdateView(LoginRequiredMixin, UpdateView):
-    model = Destination
+class AttractionUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Attraction
     fields = (
-        "location",
-        "details",
-        "country",
+        "name",
+        "description",
+        "address",
+        "rating",
+        "tags",
     )
-    template_name = "destination_edit.html"
+    template_name = "attraction_edit.html"
 
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
 
-
-class DestinationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Destination
-    template_name = "destination_delete.html"
-    success_url = reverse_lazy("destination_list")
+class AttractionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Attraction
+    template_name = "attraction_delete.html"
+    success_url = reverse_lazy("attraction_list")
 
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
 
-
-class DestinationCreateView(LoginRequiredMixin, CreateView):
-    model = Destination
-    template_name = "destination_new.html"
+class AttractionCreateView(LoginRequiredMixin, CreateView):
+    model = Attraction
+    template_name = "attraction_new.html"
     fields = (
+        "name",
+        "description",
         "location",
-        "details",
-        "country",
+        "address",
+        "rating",
+        "tags",
     )
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
