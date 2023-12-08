@@ -1,0 +1,38 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Attractions{% endblock title %}
+
+{% block content %}
+{% for attraction in attraction_list %}
+<html lang="en" dir="ltr">
+<div class="card">
+    <div class="card-header">
+        <span class="fw-bold">
+            <a href="{{ attraction.get_absolute_url }}">{{ attraction.name }}</a>
+        </span> &middot;
+        <span class="text-muted">by {{ attraction.author }} |
+            {{ attraction.date }}</span>
+    </div>
+    <div class="card-body">
+        {{ attraction.description }}
+        {% if attraction.author.pk == request.user.pk %}
+        <a href="{% url 'attraction_edit' attraction.pk %}">Edit</a>
+        <a href="{% url 'attraction_delete' attraction.pk %}">Delete</a>
+        {% endif %}
+        <a href="{{ attraction.get_absolute_url }}">New Comment</a>
+    </div>
+    <div class="card-footer text-center text-muted">
+        {% for attractioncomment in attraction.attractioncomment_set.all %}
+        <p>
+            <span class="fw-bold">
+                {{ attractioncomment.author }}
+            </span>
+            {{ attractioncomment }}
+        </p>
+        {% endfor %}
+    </div>
+</div>
+
+</html>
+{% endfor %}
+{% endblock content %}
