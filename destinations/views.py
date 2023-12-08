@@ -13,14 +13,9 @@ from django.urls import reverse_lazy, reverse
 from .forms import DestCommentForm
 from .models import Destination
 
-
-
-
-
 class DestinationListView(LoginRequiredMixin, ListView):
     model = Destination
     template_name = "destination_list.html"
-
 
 class CommentGet(DetailView):
     model = Destination
@@ -30,7 +25,6 @@ class CommentGet(DetailView):
         context = super().get_context_data(**kwargs)
         context["form"] = DestCommentForm()
         return context
-
 
 class CommentPost(SingleObjectMixin, FormView):
     model = Destination
@@ -51,7 +45,6 @@ class CommentPost(SingleObjectMixin, FormView):
     def get_success_url(self):
         location = self.object
         return reverse("destination_detail", kwargs={"pk": location.pk})
-    
 
 class DestinationDetailView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):

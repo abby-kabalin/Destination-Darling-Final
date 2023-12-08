@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class Destination(models.Model):
-    location = models.CharField(max_length=255, primary_key = True)
+    location = models.CharField(max_length=255, primary_key=True)
     details = models.TextField()
     country = models.CharField(max_length=50)
     date = models.DateTimeField(auto_now_add=True)
@@ -18,6 +18,7 @@ class Destination(models.Model):
 
     def get_absolute_url(self):
         return reverse("destination_detail", kwargs={"pk": self.pk})
+
 
 class Destination_Comment(models.Model):
     location = models.ForeignKey(Destination, on_delete=models.CASCADE)

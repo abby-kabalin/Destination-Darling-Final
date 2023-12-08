@@ -26,3 +26,6 @@ urlpatterns = [
     path("attractions/", include("attractions.urls")),
     path("", include("pages.urls")),
 ]
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+urlpatterns += staticfiles_urlpatterns()
