@@ -13,7 +13,7 @@ class Destination(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    image = models.ImageField(default = 'static_files/img/dest/no_image.jpg', upload_to = 'static_files/img/dest/')
+    image = models.ImageField(default = 'static_files/img/dest/no_image.jpg', upload_to = 'staticfiles/img/dest/')
     rating = models.IntegerField(
         blank = False,
         validators=[
