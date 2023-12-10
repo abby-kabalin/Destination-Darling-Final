@@ -13,6 +13,8 @@
   <p>{{ destination.details }}</p>
 </div>
 
+<a href="{{ destination.pk}}/attractions/">Check out regional attractions (Broken Link)</a>
+
 <hr>
 <h4>Comments about {{ destination.location }}</h4>
 {% for destination_comment in destination.destination_comment_set.all %}
