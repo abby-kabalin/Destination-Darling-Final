@@ -1,8 +1,8 @@
 from django import forms
-from .models import Destination_Comment
+from .models import DestinationComment
 
 
-class DestCommentForm(forms.ModelForm):
+class DestinationCommentForm(forms.ModelForm):
     class Meta:
-        model = Destination_Comment
+        model = DestinationComment
         fields = ("comment",)

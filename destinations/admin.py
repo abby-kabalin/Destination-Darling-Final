@@ -1,15 +1,15 @@
 from django.contrib import admin
-from .models import Destination, Destination_Comment
+from .models import Destination, DestinationComment
 
-class DestCommentInline(admin.TabularInline):
-    model = Destination_Comment
+class DestinationCommentInline(admin.TabularInline):
+    model = DestinationComment
     extra = 0
 
 
 # Register your models here.
 class DestinationAdmin(admin.ModelAdmin):
     inlines = [
-        DestCommentInline,
+        DestinationCommentInline,
     ]
     list_display = [
         "location",
@@ -21,4 +21,4 @@ class DestinationAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Destination, DestinationAdmin)
-admin.site.register(Destination_Comment)
+admin.site.register(DestinationComment)

@@ -29,10 +29,9 @@ class Destination(models.Model):
     def get_absolute_url(self):
         return reverse("destination_detail", kwargs={"pk": self.pk})
 
-
-class Destination_Comment(models.Model):
-    location = models.ForeignKey(Destination, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=255, primary_key=True)
+class DestinationComment(models.Model):
+    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=255)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
