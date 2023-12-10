@@ -5,17 +5,17 @@ from django.contrib.auth.mixins import (
 from django.views import View
 from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic.edit import (
-    UpdateView, DeleteView, CreateView
-)
+from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy, reverse
 
 from .forms import DestCommentForm
 from .models import Destination
 
+
 class DestinationListView(LoginRequiredMixin, ListView):
     model = Destination
     template_name = "destination_list.html"
+
 
 class CommentGet(DetailView):
     model = Destination
@@ -25,6 +25,7 @@ class CommentGet(DetailView):
         context = super().get_context_data(**kwargs)
         context["form"] = DestCommentForm()
         return context
+
 
 class CommentPost(SingleObjectMixin, FormView):
     model = Destination
@@ -46,6 +47,7 @@ class CommentPost(SingleObjectMixin, FormView):
         location = self.object
         return reverse("destination_detail", kwargs={"pk": location.pk})
 
+
 class DestinationDetailView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         view = CommentGet.as_view()
@@ -54,6 +56,7 @@ class DestinationDetailView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         view = CommentPost.as_view()
         return view(request, *args, **kwargs)
+
 
 class DestinationUpdateView(LoginRequiredMixin, UpdateView):
     model = Destination
@@ -91,4 +94,3 @@ class DestinationCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-

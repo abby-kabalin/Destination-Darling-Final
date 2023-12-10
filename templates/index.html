@@ -208,6 +208,14 @@
     {% block destination_list %}
     {% endblock destination_list %}
 
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/edit/" %}
+    {% block destination_edit %}
+    {% endblock destination_edit %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/delete/" %}
+    {% block destination_delete %}
+    {% endblock destination_delete %}
+
     {% else %}
     <main class="main" id="top">
         <nav class="navbar navbar-expand-lg navbar-light navbar-toggler fixed-top py-5 d-block"

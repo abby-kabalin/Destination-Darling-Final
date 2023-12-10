@@ -1,10 +1,62 @@
+{% extends 'index.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-{% block content %}
-<h1>Edit</h1>
 
-<form action="" method="post">{% csrf_token %}
-    {{ form|crispy }}
-    <button class="btn btn-info ml-2" type="submit">Update</button>
-</form>
-{% endblock content %}
+{% block destination_edit %}
+
+<main class="main" id="top">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-toggler fixed-top py-5 d-block"
+        data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/DDLogo.png' %}"
+                    height="75" alt="logo" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon">
+                </span></button>
+            <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+                    <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                            href="{% url 'destination_new' %}">+ New</a></li>
+                    <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                            href="#about">About
+                            Us</a></li>
+                    <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                            href="#user_profile">{{ user.username }} {{ user.status }}</a></li>
+                    <li class="nav-item dropdown px-3 px-lg-0"> <a
+                            class="d-inline-block ps-0 py-2 pe-3 text-decoration-none dropdown-toggle fw-medium"
+                            href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">User Settings</a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" style="border-radius:0.3rem;"
+                            aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section style="padding-top: 7rem;">
+        <div class="bg-holder">
+        </div>
+        <div class="container">
+            <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
+                    src="{% static 'img/dest/shape.svg' %}" alt="destination" /></div>
+            <div class="mb-7 text-left">
+                <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Edit</h3>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                    <form action="" method="post">{% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-info ml-2" type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock destination_edit %}
