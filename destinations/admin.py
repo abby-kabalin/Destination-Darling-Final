@@ -15,6 +15,7 @@ class DestinationAdmin(admin.ModelAdmin):
         "location",
         "details",
         "country",
+        "rating",
         "date",
         "author",
     ]

@@ -89,6 +89,8 @@ class DestinationCreateView(LoginRequiredMixin, CreateView):
         "location",
         "details",
         "country",
+        "image",
+        "rating",
     )
 
     def form_valid(self, form):
