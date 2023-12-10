@@ -1,15 +1,12 @@
-from django.contrib.auth.mixins import (
-    LoginRequiredMixin,
-    UserPassesTestMixin,
-)
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views import View
 from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy, reverse
 
-from .forms import DestCommentForm
 from .models import Destination
+from .forms import DestinationCommentForm
 
 
 class DestinationListView(LoginRequiredMixin, ListView):
@@ -23,13 +20,13 @@ class CommentGet(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form"] = DestCommentForm()
+        context["form"] = DestinationCommentForm()
         return context
 
 
 class CommentPost(SingleObjectMixin, FormView):
     model = Destination
-    form_class = DestCommentForm
+    form_class = DestinationCommentForm
     template_name = "destination_detail.html"
 
     def post(self, request, *args, **kwargs):
@@ -38,14 +35,14 @@ class CommentPost(SingleObjectMixin, FormView):
 
     def form_valid(self, form):
         comment = form.save(commit=False)
-        comment.location = self.object
+        comment.destination = self.object
         comment.author = self.request.user
         comment.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        location = self.object
-        return reverse("destination_detail", kwargs={"pk": location.pk})
+        destination = self.object
+        return reverse("destination_detail", kwargs={"pk": destination.pk})
 
 
 class DestinationDetailView(LoginRequiredMixin, View):
@@ -64,6 +61,8 @@ class DestinationUpdateView(LoginRequiredMixin, UpdateView):
         "location",
         "details",
         "country",
+        "image",
+        "rating",
     )
     template_name = "destination_edit.html"
 
