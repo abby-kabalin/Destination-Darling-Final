@@ -1,9 +1,274 @@
 {% load static %}
-{% load crispy_forms_tags %}
+
+
 {% block destination_delete %}
-<h1>Delete</h1>
-<form action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ destination.location }}"?</p>
-    <button class="btn btn-danger ml-2" type="submit">Confirm</button>
-</form>
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Destination Darling</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon-16x16.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicons/favicon.ico' %}">
+    <link rel="manifest" href="{% static 'img/favicons/manifest.json' %}">
+    <meta name="msapplication-TileImage" content="{% static 'img/favicons/mstile-150x150.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet" />
+
+
+    <!-- ===============================================-->
+    <!--     Mouse Sparkle Effect-->
+    <!-- ===============================================-->
+    <script type="text/javascript">
+        // <![CDATA[
+        var colour = "#000000";
+        var sparkles = 120;/****************************
+    *  Tinkerbell Magic Sparkle *
+    * (c) 2005 mf2fm web-design *
+    *  http://www.mf2fm.com/rv  *
+    * DON'T EDIT BELOW THIS BOX *
+    ****************************/
+        var x = ox = 400;
+        var y = oy = 300;
+        var swide = 800;
+        var shigh = 600;
+        var sleft = sdown = 0;
+        var tiny = new Array();
+        var star = new Array();
+        var starv = new Array();
+        var starx = new Array();
+        var stary = new Array();
+        var tinyx = new Array();
+        var tinyy = new Array();
+        var tinyv = new Array(); window.onload = function () {
+            if (document.getElementById) {
+                var i, rats, rlef, rdow;
+                for (var i = 0; i < sparkles; i++) {
+                    var rats = createDiv(3, 3);
+                    rats.style.visibility = "hidden";
+                    document.body.appendChild(tiny[i] = rats);
+                    starv[i] = 0;
+                    tinyv[i] = 0;
+                    var rats = createDiv(5, 5);
+                    rats.style.backgroundColor = "transparent";
+                    rats.style.visibility = "hidden";
+                    var rlef = createDiv(1, 5);
+                    var rdow = createDiv(5, 1);
+                    rats.appendChild(rlef);
+                    rats.appendChild(rdow);
+                    rlef.style.top = "2px";
+                    rlef.style.left = "0px";
+                    rdow.style.top = "0px";
+                    rdow.style.left = "2px";
+                    document.body.appendChild(star[i] = rats);
+                }
+                set_width();
+                sparkle();
+            }
+        }
+        function sparkle() {
+            var c;
+            if (x != ox || y != oy) {
+                ox = x;
+                oy = y;
+                for (c = 0; c < sparkles; c++) if (!starv[c]) {
+                    star[c].style.left = (starx[c] = x) + "px";
+                    star[c].style.top = (stary[c] = y) + "px";
+                    star[c].style.clip = "rect(0px, 5px, 5px, 0px)";
+                    star[c].style.visibility = "visible";
+                    starv[c] = 50;
+                    break;
+                }
+            }
+            for (c = 0; c < sparkles; c++) {
+                if (starv[c]) update_star(c);
+                if (tinyv[c]) update_tiny(c);
+            }
+            setTimeout("sparkle()", 40);
+        } function update_star(i) {
+            if (--starv[i] == 25) star[i].style.clip = "rect(1px, 4px, 4px, 1px)";
+            if (starv[i]) {
+                stary[i] += 1 + Math.random() * 3;
+                if (stary[i] < shigh + sdown) {
+                    star[i].style.top = stary[i] + "px";
+                    starx[i] += (i % 5 - 2) / 5;
+                    star[i].style.left = starx[i] + "px";
+                }
+                else {
+                    star[i].style.visibility = "hidden";
+                    starv[i] = 0;
+                    return;
+                }
+            }
+            else {
+                tinyv[i] = 50;
+                tiny[i].style.top = (tinyy[i] = stary[i]) + "px";
+                tiny[i].style.left = (tinyx[i] = starx[i]) + "px";
+                tiny[i].style.width = "2px";
+                tiny[i].style.height = "2px";
+                star[i].style.visibility = "hidden";
+                tiny[i].style.visibility = "visible"
+            }
+        } function update_tiny(i) {
+            if (--tinyv[i] == 25) {
+                tiny[i].style.width = "1px";
+                tiny[i].style.height = "1px";
+            }
+            if (tinyv[i]) {
+                tinyy[i] += 1 + Math.random() * 3;
+                if (tinyy[i] < shigh + sdown) {
+                    tiny[i].style.top = tinyy[i] + "px";
+                    tinyx[i] += (i % 5 - 2) / 5;
+                    tiny[i].style.left = tinyx[i] + "px";
+                }
+                else {
+                    tiny[i].style.visibility = "hidden";
+                    tinyv[i] = 0;
+                    return;
+                }
+            }
+            else tiny[i].style.visibility = "hidden";
+        } document.onmousemove = mouse;
+        function mouse(e) {
+            set_scroll();
+            y = (e) ? e.pageY : event.y + sdown;
+            x = (e) ? e.pageX : event.x + sleft;
+        } function set_scroll() {
+            if (typeof (self.pageYOffset) == "number") {
+                sdown = self.pageYOffset;
+                sleft = self.pageXOffset;
+            }
+            else if (document.body.scrollTop || document.body.scrollLeft) {
+                sdown = document.body.scrollTop;
+                sleft = document.body.scrollLeft;
+            }
+            else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+                sleft = document.documentElement.scrollLeft;
+                sdown = document.documentElement.scrollTop;
+            }
+            else {
+                sdown = 0;
+                sleft = 0;
+            }
+        } window.onresize = set_width;
+        function set_width() {
+            if (typeof (self.innerWidth) == "number") {
+                swide = self.innerWidth;
+                shigh = self.innerHeight;
+            }
+            else if (document.documentElement && document.documentElement.clientWidth) {
+                swide = document.documentElement.clientWidth;
+                shigh = document.documentElement.clientHeight;
+            }
+            else if (document.body.clientWidth) {
+                swide = document.body.clientWidth;
+                shigh = document.body.clientHeight;
+            }
+        } function createDiv(height, width) {
+            var div = document.createElement("div");
+            div.style.position = "absolute";
+            div.style.height = height + "px";
+            div.style.width = width + "px";
+            div.style.overflow = "hidden";
+            div.style.backgroundColor = colour;
+            return (div);
+        }
+        // ]]>
+    </script>
+
+</head>
+
+<body>
+
+    <main class="main" id="top">
+        <nav class="navbar navbar-expand-lg navbar-light navbar-toggler fixed-top py-5 d-block"
+            data-navbar-on-scroll="data-navbar-on-scroll">
+            <div class="container"><a class="navbar-brand" href="{% url 'index' %}"><img
+                        src="{% static 'img/DDLogo.png' %}" height="75" alt="logo" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">
+                    </span></button>
+                <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'destination_new' %}">+ New</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'destination_list' %}">Destinations</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="#about">About
+                                Us</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="#user_profile">{{ user.username }} {{ user.status }}</a></li>
+                        <li class="nav-item dropdown px-3 px-lg-0"> <a
+                                class="d-inline-block ps-0 py-2 pe-3 text-decoration-none dropdown-toggle fw-medium"
+                                href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">User Settings</a>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" style="border-radius:0.3rem;"
+                                aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section style="padding-top: 7rem;">
+            <div class="bg-holder">
+            </div>
+            <div class="container">
+                <div class="text-center text-md-start py-4">
+                    <h1 class="hero-title">Delete</h1>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %} <h4 class="fw-bold text-danger mb-3">Are you sure you want to delete <a
+                                    class="link-900 text-decoration-none link"
+                                    href="{{ destination.get_absolute_url }}">{{ destination.location }}</a> ?</h4>
+                            <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="{% static 'vendors/@popperjs/popper.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendors/is/is.min.js' %}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="{% static 'vendors/fontawesome/all.min.js' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+        rel="stylesheet">
+</body>
+
 {% endblock destination_delete %}

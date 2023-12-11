@@ -13,21 +13,20 @@ class Destination(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    image = models.ImageField(default = 'static_files/img/dest/no_image.jpg', upload_to = 'staticfiles/img/dest/')
-    rating = models.IntegerField(
-        blank = False,
-        validators=[
-            MaxValueValidator(5),
-            MinValueValidator(1)
-        ]
+    image = models.ImageField(
+        default="staticfiles/img/dest/no_image.jpg", upload_to="static/img/dest/"
     )
-    numberReviews = models.IntegerField(default = 1)
+    rating = models.IntegerField(
+        blank=False, validators=[MaxValueValidator(5), MinValueValidator(1)]
+    )
+    numberReviews = models.IntegerField(default=1)
 
     def __str__(self):
         return self.location
 
     def get_absolute_url(self):
         return reverse("destination_detail", kwargs={"pk": self.pk})
+
 
 class DestinationComment(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
@@ -42,4 +41,3 @@ class DestinationComment(models.Model):
 
     def get_absolute_url(self):
         return reverse("destination_list")
-
