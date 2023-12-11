@@ -21,7 +21,3 @@ urlpatterns = [
     path("new/", DestinationCreateView.as_view(), name="destination_new"),
     path("", DestinationListView.as_view(), name="destination_list"),
 ]
-
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
-urlpatterns += staticfiles_urlpatterns()

@@ -53,7 +53,8 @@
             <div class="row">
                 {% for destination in destination_list %}
                 <div class="col-md-4 mb-4">
-                    <div class="card overflow-hidden shadow">
+                    <div class="card overflow-hidden shadow"> <img class="card-img-top"
+                            src="{{ destination.image.url }}" alt="destination-image" />
                         <div class="card-body py-3 px-3">
                             <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                                 <h4 class="text-secondary"><a class="link-900 text-decoration-none link"
@@ -65,7 +66,6 @@
                             <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                                 {{ destination.details }}
                             </div>
-                            <div><img src="{% static {{ destination.image }} %}"></div>
                             <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                                 {% if destination.author.pk == request.user.pk %}
                                 <a class="link-900 text-decoration-none link"

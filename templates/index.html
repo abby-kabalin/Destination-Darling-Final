@@ -208,13 +208,18 @@
     {% block destination_list %}
     {% endblock destination_list %}
 
-    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/edit/" %}
-    {% block destination_edit %}
-    {% endblock destination_edit %}
+    {% elif request.get_full_path == "/destinations/ {{ destination.pk }} /edit/" %}
+    {% include "destination_edit.html" %}
 
     {% elif request.get_full_path == "/destinations/{{ destination.pk }}/delete/" %}
-    {% block destination_delete %}
-    {% endblock destination_delete %}
+    {% include "destination_delete.html" %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/" %}
+    {% include "templates/destination_detail.html" %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/attractions/" %}
+    {% include "templates/attraction_list.html" %}
+
 
     {% else %}
     <main class="main" id="top">
