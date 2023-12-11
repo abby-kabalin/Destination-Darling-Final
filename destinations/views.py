@@ -62,7 +62,6 @@ class DestinationUpdateView(LoginRequiredMixin, UpdateView):
         "details",
         "country",
         "image",
-        "rating",
     )
     template_name = "destination_edit.html"
 
@@ -89,7 +88,6 @@ class DestinationCreateView(LoginRequiredMixin, CreateView):
         "details",
         "country",
         "image",
-        "rating",
     )
 
     def form_valid(self, form):

@@ -1,0 +1,390 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Destination Darling</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon-16x16.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicons/favicon.ico' %}">
+    <link rel="manifest" href="{% static 'img/favicons/manifest.json' %}">
+    <meta name="msapplication-TileImage" content="{% static 'img/favicons/mstile-150x150.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet" />
+
+
+    <!-- ===============================================-->
+    <!--     Mouse Sparkle Effect-->
+    <!-- ===============================================-->
+    <script type="text/javascript">
+        // <![CDATA[
+        var colour = "#000000";
+        var sparkles = 120;/****************************
+    *  Tinkerbell Magic Sparkle *
+    * (c) 2005 mf2fm web-design *
+    *  http://www.mf2fm.com/rv  *
+    * DON'T EDIT BELOW THIS BOX *
+    ****************************/
+        var x = ox = 400;
+        var y = oy = 300;
+        var swide = 800;
+        var shigh = 600;
+        var sleft = sdown = 0;
+        var tiny = new Array();
+        var star = new Array();
+        var starv = new Array();
+        var starx = new Array();
+        var stary = new Array();
+        var tinyx = new Array();
+        var tinyy = new Array();
+        var tinyv = new Array(); window.onload = function () {
+            if (document.getElementById) {
+                var i, rats, rlef, rdow;
+                for (var i = 0; i < sparkles; i++) {
+                    var rats = createDiv(3, 3);
+                    rats.style.visibility = "hidden";
+                    document.body.appendChild(tiny[i] = rats);
+                    starv[i] = 0;
+                    tinyv[i] = 0;
+                    var rats = createDiv(5, 5);
+                    rats.style.backgroundColor = "transparent";
+                    rats.style.visibility = "hidden";
+                    var rlef = createDiv(1, 5);
+                    var rdow = createDiv(5, 1);
+                    rats.appendChild(rlef);
+                    rats.appendChild(rdow);
+                    rlef.style.top = "2px";
+                    rlef.style.left = "0px";
+                    rdow.style.top = "0px";
+                    rdow.style.left = "2px";
+                    document.body.appendChild(star[i] = rats);
+                }
+                set_width();
+                sparkle();
+            }
+        }
+        function sparkle() {
+            var c;
+            if (x != ox || y != oy) {
+                ox = x;
+                oy = y;
+                for (c = 0; c < sparkles; c++) if (!starv[c]) {
+                    star[c].style.left = (starx[c] = x) + "px";
+                    star[c].style.top = (stary[c] = y) + "px";
+                    star[c].style.clip = "rect(0px, 5px, 5px, 0px)";
+                    star[c].style.visibility = "visible";
+                    starv[c] = 50;
+                    break;
+                }
+            }
+            for (c = 0; c < sparkles; c++) {
+                if (starv[c]) update_star(c);
+                if (tinyv[c]) update_tiny(c);
+            }
+            setTimeout("sparkle()", 40);
+        } function update_star(i) {
+            if (--starv[i] == 25) star[i].style.clip = "rect(1px, 4px, 4px, 1px)";
+            if (starv[i]) {
+                stary[i] += 1 + Math.random() * 3;
+                if (stary[i] < shigh + sdown) {
+                    star[i].style.top = stary[i] + "px";
+                    starx[i] += (i % 5 - 2) / 5;
+                    star[i].style.left = starx[i] + "px";
+                }
+                else {
+                    star[i].style.visibility = "hidden";
+                    starv[i] = 0;
+                    return;
+                }
+            }
+            else {
+                tinyv[i] = 50;
+                tiny[i].style.top = (tinyy[i] = stary[i]) + "px";
+                tiny[i].style.left = (tinyx[i] = starx[i]) + "px";
+                tiny[i].style.width = "2px";
+                tiny[i].style.height = "2px";
+                star[i].style.visibility = "hidden";
+                tiny[i].style.visibility = "visible"
+            }
+        } function update_tiny(i) {
+            if (--tinyv[i] == 25) {
+                tiny[i].style.width = "1px";
+                tiny[i].style.height = "1px";
+            }
+            if (tinyv[i]) {
+                tinyy[i] += 1 + Math.random() * 3;
+                if (tinyy[i] < shigh + sdown) {
+                    tiny[i].style.top = tinyy[i] + "px";
+                    tinyx[i] += (i % 5 - 2) / 5;
+                    tiny[i].style.left = tinyx[i] + "px";
+                }
+                else {
+                    tiny[i].style.visibility = "hidden";
+                    tinyv[i] = 0;
+                    return;
+                }
+            }
+            else tiny[i].style.visibility = "hidden";
+        } document.onmousemove = mouse;
+        function mouse(e) {
+            set_scroll();
+            y = (e) ? e.pageY : event.y + sdown;
+            x = (e) ? e.pageX : event.x + sleft;
+        } function set_scroll() {
+            if (typeof (self.pageYOffset) == "number") {
+                sdown = self.pageYOffset;
+                sleft = self.pageXOffset;
+            }
+            else if (document.body.scrollTop || document.body.scrollLeft) {
+                sdown = document.body.scrollTop;
+                sleft = document.body.scrollLeft;
+            }
+            else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+                sleft = document.documentElement.scrollLeft;
+                sdown = document.documentElement.scrollTop;
+            }
+            else {
+                sdown = 0;
+                sleft = 0;
+            }
+        } window.onresize = set_width;
+        function set_width() {
+            if (typeof (self.innerWidth) == "number") {
+                swide = self.innerWidth;
+                shigh = self.innerHeight;
+            }
+            else if (document.documentElement && document.documentElement.clientWidth) {
+                swide = document.documentElement.clientWidth;
+                shigh = document.documentElement.clientHeight;
+            }
+            else if (document.body.clientWidth) {
+                swide = document.body.clientWidth;
+                shigh = document.body.clientHeight;
+            }
+        } function createDiv(height, width) {
+            var div = document.createElement("div");
+            div.style.position = "absolute";
+            div.style.height = height + "px";
+            div.style.width = width + "px";
+            div.style.overflow = "hidden";
+            div.style.backgroundColor = colour;
+            return (div);
+        }
+        // ]]>
+    </script>
+
+</head>
+
+
+<body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    {% if request.get_full_path == "/destinations/new/" %}
+    {% block destination_new %}
+    {% endblock destination_new %}
+
+    {% elif request.get_full_path == "/destinations/" %}
+    {% block destination_list %}
+    {% endblock destination_list %}
+
+    {% elif request.get_full_path == "/destinations/ {{ destination.pk }} /edit/" %}
+    {% include "destination_edit.html" %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/delete/" %}
+    {% include "destination_delete.html" %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/" %}
+    {% include "templates/destination_detail.html" %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/attractions/" %}
+    {% include "templates/attraction_list.html" %}
+
+
+    {% else %}
+    <main class="main" id="top">
+        <nav class="navbar navbar-expand-lg navbar-light navbar-toggler fixed-top py-5 d-block"
+            data-navbar-on-scroll="data-navbar-on-scroll">
+            <div class="container"><a class="navbar-brand" href="{% url 'index' %}"><img
+                        src="{% static 'img/DDLogo.png' %}" height="75" alt="logo" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">
+                    </span></button>
+                {% if user.is_authenticated %}
+                <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'destination_new' %}">+ Add a New Destination</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'destination_list' %}">Destinations</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="#about">About
+                                Us</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="#user_profile">{{ user.username }} {{ user.status }}</a></li>
+                        <li class="nav-item dropdown px-3 px-lg-0"> <a
+                                class="d-inline-block ps-0 py-2 pe-3 text-decoration-none dropdown-toggle fw-medium"
+                                href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">User Settings</a>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" style="border-radius:0.3rem;"
+                                aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                {% else %}
+                <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'destination_list' %}">Destinations</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="#about">About
+                                Us</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark order-1 order-lg-0 fw-medium"
+                                href="{% url 'signup' %}">Sign Up</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <section style="padding-top: 7rem;">
+            <div class="bg-holder">
+            </div>
+            <!--/.bg-holder-->
+
+
+            <div class="container">
+                <div class="row align-items-center">
+                    {% if request.get_full_path == "/accounts/login/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block login %}
+                        {% endblock login %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/signup/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block signup %}
+                        {% endblock signup %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/password_change/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block password_change %}
+                        {% endblock password_change %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/password_change/done/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block password_change_done %}
+                        {% endblock password_change_done %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/password_reset/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block forgot_password %}
+                        {% endblock forgot_password %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/password_reset/done/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block email_sent %}
+                        {% endblock email_sent %}
+                    </div>
+
+                    {% else %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        <h4 class="fw-bold text-danger mb-3">Information about Destination Darling</h4>
+                        <h5 class="fw-bold text-danger mb-3">About Us</h5>
+                        <p class="mb-4 fw-medium">Hello! We're the developers behind Destination Darling: Abby, Ingrid,
+                            and Jackie.
+                            <br> Destination Darling arose from a group project in the University of Montana's Web
+                            Application Development class.
+                            With a shared love for traveling (and planning ahead), creating a social media inspired
+                            destination and attractions app only made sense.
+                            While still imperfect, Destination Darling provides a place for jet-setters and home-body
+                            dreamers alike to share experiences to make
+                            planning trips a little easier on everyone.
+                        </p>
+                        <h5 class="fw-bold text-danger mb-3">Application Functionality</h5>
+                        <p class="mb-4 fw-medium">At this time, Destination Darling allows a myriad of functionalities
+                            with more to be added in the future.
+                            <br>To explore the site, first create your account with us by providing a username, email,
+                            and your country of residence. Both email and country of residence are private and will
+                            never be publically shared.
+                            <br>Upon account creation, you may notice the status "egg" next to your username on the
+                            homepage. This is the basic status all users begin with, and future functionality seeks to
+                            implement ranked statuses (hatchling, nestling, fledgling, etc) based on user contributions
+                            to the site.
+                            <br>Once registered, you are free to explore the page of destinations, add new destinations,
+                            and edit or delete destinations you have created.
+                            <br>Within each destination, you also have access to various user-added attractions (think
+                            restaurants, activities, events) at that destination. You can also add new attractions that
+                            you think other users would like!
+                        </p>
+                        <h5 class="fw-bold text-danger mb-3">Future Additions</h5>
+                        <p class="mb-4 fw-medium">Moving forward, we are looking to add additional functionalities like
+                            ranked user statuses, sorting destinations and attractions by various criteria, and external
+                            collaborations to allow users to book trips directly from Destination Darling's site. Keep a
+                            lookout for these improvements!</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <div class="py-5 text-center">
+            <p class="mb-0 text-secondary fs--1 fw-medium">All rights reserved@darling.co </p>
+        </div>
+    </main>
+
+    {% endif %}
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="{% static 'vendors/@popperjs/popper.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendors/is/is.min.js' %}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="{% static 'vendors/fontawesome/all.min.js' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+        rel="stylesheet">
+</body>
+
+</html>

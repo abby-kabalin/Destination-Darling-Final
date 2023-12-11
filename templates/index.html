@@ -235,7 +235,7 @@
                 <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                                href="{% url 'destination_new' %}">+ New</a></li>
+                                href="{% url 'destination_new' %}">+ Add a New Destination</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
                                 href="{% url 'destination_list' %}">Destinations</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
@@ -329,7 +329,7 @@
                                 class="d-none d-xl-block" />or abroad.</p>
                         <div class="text-center text-md-start"> <a
                                 class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
-                                href="#!" role="button">Find out more</a>
+                                href="/templates/findOutMore.html" role="button">Find out more</a>
                         </div>
                     </div>
                     {% endif %}
@@ -486,12 +486,14 @@
                                         <div class="card shadow" style="border-radius:10px;">
                                             <div class="position-absolute start-0 top-0 translate-middle"> <img
                                                     class="rounded-circle fit-cover"
-                                                    src="{% static 'img/testimonial/author.png' %}" height="65"
+                                                    src="{% static 'img/testimonial/author3.png' %}" height="65"
                                                     width="65" alt="" /></div>
                                             <div class="card-body p-4">
-                                                <p class="fw-medium mb-4">&quot;To be added&quot;</p>
-                                                <h5 class="text-secondary">Person1</h5>
-                                                <p class="fw-medium fs--1 mb-0">Place, World</p>
+                                                <p class="fw-medium mb-4">&quot;Destination Darling has become my go-to
+                                                    for learning about new places. Well thought-out and friendly
+                                                    customer assistance!&quot;</p>
+                                                <h5 class="text-secondary">UltimateDarling</h5>
+                                                <p class="fw-medium fs--1 mb-0">Manhattan, KS, USA</p>
                                             </div>
                                         </div>
                                         <div class="card shadow-sm position-absolute top-0 z-index--1 mb-3 w-100 h-100"
@@ -504,9 +506,10 @@
                                                     src="{% static 'img/testimonial/author2.png' %}" height="65"
                                                     width="65" alt="" /></div>
                                             <div class="card-body p-4">
-                                                <p class="fw-medium mb-4">&quot;To be added&quot;</p>
-                                                <h5 class="text-secondary">Person2</h5>
-                                                <p class="fw-medium fs--1 mb-0">Place, World</p>
+                                                <p class="fw-medium mb-4">&quot;Definitely an up-and-coming site that
+                                                    will make planning trips much easier!&quot;</p>
+                                                <h5 class="text-secondary">TheDisneyDojo</h5>
+                                                <p class="fw-medium fs--1 mb-0">Jackson, TN, USA</p>
                                             </div>
                                         </div>
                                         <div class="card shadow-sm position-absolute top-0 z-index--1 mb-3 w-100 h-100"
@@ -516,12 +519,13 @@
                                         <div class="card shadow" style="border-radius:10px;">
                                             <div class="position-absolute start-0 top-0 translate-middle"> <img
                                                     class="rounded-circle fit-cover"
-                                                    src="{% static 'img/testimonial/author3.png' %}" height="65"
+                                                    src="{% static 'img/testimonial/author.png' %}" height="65"
                                                     width="65" alt="" /></div>
                                             <div class="card-body p-4">
-                                                <p class="fw-medium mb-4">&quot;To be added&quot;</p>
-                                                <h5 class="text-secondary">Person3</h5>
-                                                <p class="fw-medium fs--1 mb-0">Place, World</p>
+                                                <p class="fw-medium mb-4">&quot;Super helpful to find the best places to
+                                                    eat in any city!&quot;</p>
+                                                <h5 class="text-secondary">MarcusA0204</h5>
+                                                <p class="fw-medium fs--1 mb-0">Kalispell, MT, USA</p>
                                             </div>
                                         </div>
                                         <div class="card shadow-sm position-absolute top-0 z-index--1 mb-3 w-100 h-100"
@@ -604,19 +608,11 @@
                         <div class="col-lg-8 col-md-10">
                             <h2 class="text-secondary lh-1-7 mb-7">Subscribe to get information, latest news and other
                                 interesting
-                                offers about Destination Darling</h2>
-                            <form class="row g-3 align-items-center w-lg-75 mx-auto">
-                                <div class="col-sm">
-                                    <div class="input-group-icon">
-                                        <input class="form-control form-little-squirrel-control" type="email"
-                                            placeholder="Enter email " aria-label="email" /><img class="input-box-icon"
-                                            src="{% static 'img/cta/mail.svg' %}" width="17" alt="mail" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-auto">
-                                    <button class="btn btn-danger orange-gradient-btn fs--1">Subscribe</button>
-                                </div>
-                            </form>
+                                offers about Destination Darling by creating an account!</h2>
+                            <div class="text-center"> <a
+                                    class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
+                                    href="{% url 'signup' %}" role="button">Subscribe Today</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -659,7 +655,7 @@
                             <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none" href="#!">Press</a>
                             </li>
                             <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
-                                    href="#!">Affiliate</a></li>
+                                    href="#!">Affiliates</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-5 col-12 mb-4 mb-md-6 mb-lg-0 order-lg-4 order-md-1">
