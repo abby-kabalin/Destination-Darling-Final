@@ -19,10 +19,10 @@
                     <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
                             href="{% url 'destination_new' %}">+ New</a></li>
                     <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                            href="#about">About
+                            href="{% url 'about' %}">About
                             Us</a></li>
                     <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                            href="#user_profile">{{ user.username }} {{ user.status }}</a></li>
+                            href="{% url 'user_profile' %}">{{ user.username }} {{ user.status }}</a></li>
                     <li class="nav-item dropdown px-3 px-lg-0"> <a
                             class="d-inline-block ps-0 py-2 pe-3 text-decoration-none dropdown-toggle fw-medium"
                             href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -43,8 +43,6 @@
         <div class="bg-holder">
         </div>
         <div class="container">
-            <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
-                    src="{% static 'img/dest/shape.svg' %}" alt="destination" /></div>
             <div class="mb-7 text-center">
                 <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Destinations</h3>
             </div>
@@ -82,5 +80,8 @@
         </div>
     </section>
 </main>
+<div class="py-5 text-center">
+    <p class="mb-0 text-secondary fs--1 fw-medium">All rights reserved@darling.co </p>
+</div>
 
 {% endblock destination_list %}

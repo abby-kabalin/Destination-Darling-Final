@@ -20,12 +20,7 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'img/favicons/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicons/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon-16x16.png' %}">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicons/favicon.ico' %}">
-    <link rel="manifest" href="{% static 'img/favicons/manifest.json' %}">
-    <meta name="msapplication-TileImage" content="{% static 'img/favicons/mstile-150x150.png' %}">
+    <link rel="icon" type="image/png" sizes="20x20" href="{% static 'img/favicons/favicon-512x512.png' %}">
     <meta name="theme-color" content="#ffffff">
 
 
@@ -212,10 +207,10 @@
                     <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
                             href="{% url 'destination_list' %}">Destinations</a></li>
                     <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                            href="#about">About
+                            href="{% url 'about' %}">About
                             Us</a></li>
                     <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                            href="#user_profile">{{ user.username }} {{ user.status }}</a></li>
+                            href="{% url 'user_profile' %}">{{ user.username }} {{ user.status }}</a></li>
                     <li class="nav-item dropdown px-3 px-lg-0"> <a
                             class="d-inline-block ps-0 py-2 pe-3 text-decoration-none dropdown-toggle fw-medium"
                             href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -250,6 +245,9 @@
         </div>
     </section>
 </main>
+<div class="py-5 text-center">
+    <p class="mb-0 text-secondary fs--1 fw-medium">All rights reserved@darling.co </p>
+</div>
 
 <!-- ===============================================-->
 <!--    JavaScripts-->
