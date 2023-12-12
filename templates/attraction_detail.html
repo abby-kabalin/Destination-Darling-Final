@@ -315,7 +315,7 @@
           </div>
           {% endif %}
           <div class="row align-items-center py-3"></div>
-          <p>Back to <a href="{% url 'attraction_list' %}">All Attractions</a>.</p>
+          <p>Back to <a href="{{ attraction.get_url }}/attractions/">All Attractions</a>.</p>
         </div>
       </div>
       </section>

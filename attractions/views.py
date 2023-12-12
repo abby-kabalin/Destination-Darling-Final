@@ -77,7 +77,7 @@ class AttractionUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class AttractionDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Attraction
     template_name = "attraction_delete.html"
-    success_url = reverse_lazy("attraction_list")
+    success_url = "/destinations/{{ attraction.get_url }}/attractions/"
 
     def test_func(self):
         obj = self.get_object()
