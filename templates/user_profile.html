@@ -1,8 +1,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
-{% block attraction_delete %}
+{% block user_profile %}
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
@@ -193,8 +192,34 @@
 
 </head>
 
+
 <body>
 
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    {% if request.get_full_path == "/destinations/new/" %}
+    {% block destination_new %}
+    {% endblock destination_new %}
+
+    {% elif request.get_full_path == "/destinations/" %}
+    {% block destination_list %}
+    {% endblock destination_list %}
+
+    {% elif request.get_full_path == "/destinations/ {{ destination.pk }} /edit/" %}
+    {% include "destination_edit.html" %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/delete/" %}
+    {% include "destination_delete.html" %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/" %}
+    {% include "templates/destination_detail.html" %}
+
+    {% elif request.get_full_path == "/destinations/{{ destination.pk }}/attractions/" %}
+    {% include "templates/attraction_list.html" %}
+
+
+    {% else %}
     <main class="main" id="top">
         <nav class="navbar navbar-expand-lg navbar-light navbar-toggler fixed-top py-5 d-block"
             data-navbar-on-scroll="data-navbar-on-scroll">
@@ -204,17 +229,16 @@
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">
                     </span></button>
+                {% if user.is_authenticated %}
                 <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                                href="{% url 'destination_new' %}">+ New</a></li>
+                                href="{% url 'destination_new' %}">+ Add a New Destination</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
                                 href="{% url 'destination_list' %}">Destinations</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
                                 href="{% url 'about' %}">About
                                 Us</a></li>
-                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                                href="{% url 'user_profile' %}">{{ user.username }} {{ user.status }}</a></li>
                         <li class="nav-item dropdown px-3 px-lg-0"> <a
                                 class="d-inline-block ps-0 py-2 pe-3 text-decoration-none dropdown-toggle fw-medium"
                                 href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -228,32 +252,108 @@
                         </li>
                     </ul>
                 </div>
+                {% else %}
+                <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'destination_list' %}">Destinations</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'about' %}">About
+                                Us</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark order-1 order-lg-0 fw-medium"
+                                href="{% url 'signup' %}">Sign Up</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
             </div>
         </nav>
-
         <section style="padding-top: 7rem;">
             <div class="bg-holder">
             </div>
+            <!--/.bg-holder-->
+
+
             <div class="container">
-                <div class="text-center text-md-start py-4">
-                    <h1 class="hero-title">Delete</h1>
-                </div>
                 <div class="row align-items-center">
+                    {% if request.get_full_path == "/accounts/login/" %}
                     <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            {% csrf_token %} <h4 class="fw-bold text-danger mb-3">Are you sure you want to delete <a
-                                    class="link-900 text-decoration-none link"
-                                    href="{{ attraction.get_absolute_url }}">{{ attraction.name }}</a> ?</h4>
-                            <button class="btn btn-danger ml-2" type="submit">Confirm</button>
-                        </form>
+                        {% block login %}
+                        {% endblock login %}
                     </div>
+
+                    {% elif request.get_full_path == "/accounts/signup/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block signup %}
+                        {% endblock signup %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/password_change/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block password_change %}
+                        {% endblock password_change %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/password_change/done/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block password_change_done %}
+                        {% endblock password_change_done %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/password_reset/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block forgot_password %}
+                        {% endblock forgot_password %}
+                    </div>
+
+                    {% elif request.get_full_path == "/accounts/password_reset/done/" %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        {% block email_sent %}
+                        {% endblock email_sent %}
+                    </div>
+
+                    {% else %}
+                    <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                        <h4 class="fw-bold text-danger mb-3">Welcome to Your User Profile</h4>
+                        <h5 class="fw-bold text-danger mb-3">Status</h5>
+                        <p class="mb-4 fw-medium">Your current status is {{ user.status }}. This status is based on the
+                            amount of interactions and posts you've accumulated on the site. The more you post, the
+                            higher your ranking!
+                        </p>
+                        <h5 class="fw-bold text-danger mb-3">Current Rankings</h5>
+                        <p class="mb-4 fw-medium">At this time, the only ranking is "egg". As you post more, you will
+                            move up the rankings!
+                            <br>The next possible rankings are "hatchling", "nestling", and "fledgling". These rankings
+                            are for interactions between once every 3 months to twice every month, and a post to 6 posts
+                            in that time frame.
+                            <br>After these rankings are "flapping", "soaring", and "flying". These rankings are for
+                            interactions incrementally above the previous rankings. Our exact algorithm is not specified
+                            at this time.
+                        </p>
+                        <h5 class="fw-bold text-danger mb-3">Future Additions</h5>
+                        <p class="mb-4 fw-medium">Moving forward, we are looking to add the ability to select different
+                            avatars when you reach a new rank, as well as badges within each rank to track a user's
+                            progress.</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </section>
+
+        <div class="py-5 text-center">
+            <p class="mb-0 text-secondary fs--1 fw-medium">All rights reserved@darling.co </p>
+        </div>
     </main>
-    <div class="py-5 text-center">
-        <p class="mb-0 text-secondary fs--1 fw-medium">All rights reserved@darling.co </p>
-    </div>
+
+    {% endif %}
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+
 
     <!-- ===============================================-->
     <!--    JavaScripts-->
@@ -270,4 +370,5 @@
         rel="stylesheet">
 </body>
 
-{% endblock attraction_delete %}
+</html>
+{% endblock user_profile %}

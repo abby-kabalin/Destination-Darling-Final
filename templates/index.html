@@ -17,12 +17,8 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'img/favicons/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicons/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon-16x16.png' %}">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicons/favicon.ico' %}">
-    <link rel="manifest" href="{% static 'img/favicons/manifest.json' %}">
-    <meta name="msapplication-TileImage" content="{% static 'img/favicons/mstile-150x150.png' %}">
+
+    <link rel="icon" type="image/png" sizes="20x20" href="{% static 'img/favicons/favicon-512x512.png' %}">
     <meta name="theme-color" content="#ffffff">
 
 
@@ -235,14 +231,14 @@
                 <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                                href="{% url 'destination_new' %}">+ Add a New Destination</a></li>
+                                href="{% url 'destination_new' %}">+ New Destination</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
                                 href="{% url 'destination_list' %}">Destinations</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                                href="#about">About
+                                href="{% url 'about' %}">About
                                 Us</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                                href="#user_profile">{{ user.username }} {{ user.status }}</a></li>
+                                href="{% url 'user_profile' %}">{{ user.username }} {{ user.status }}</a></li>
                         <li class="nav-item dropdown px-3 px-lg-0"> <a
                                 class="d-inline-block ps-0 py-2 pe-3 text-decoration-none dropdown-toggle fw-medium"
                                 href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -262,7 +258,7 @@
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
                                 href="{% url 'destination_list' %}">Destinations</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
-                                href="#about">About
+                                href="{% url 'about'}">About
                                 Us</a></li>
                         <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
                                 href="{% url 'login' %}">Login</a>
@@ -329,7 +325,7 @@
                                 class="d-none d-xl-block" />or abroad.</p>
                         <div class="text-center text-md-start"> <a
                                 class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow"
-                                href="/templates/findOutMore.html" role="button">Find out more</a>
+                                href="{% url 'about' %}" role="button">Find out more</a>
                         </div>
                     </div>
                     {% endif %}
