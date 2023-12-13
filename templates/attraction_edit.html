@@ -236,7 +236,8 @@
             </div>
             <div class="row align-items-center">
                 <div class="col-md-5 col-lg-6 text-md-start text-center">
-                    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {%csrf_token %}
                         {{ form|crispy }}
                         <button class="btn btn-info ml-2" type="submit">Update</button>
                     </form>
