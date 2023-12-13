@@ -1,0 +1,20 @@
+# Destinations
+These destinations are an app built to hold posts and editting/deleting
+in order to make the web app more user friendly
+and readable
+
+## Installation
+This app is installed with the forking of the repo, there is not additional packages needed specifically for this app
+
+## Usage
+
+# controls tagging within html
+{{ destination.blank }}
+
+# allows for implementation of urls in html
+{% url 'destination.blank' %}
+
+# url specifics
+in order to visit a specific destination's url to edit, say Rome, Italy,
+format the url as {% url 'destination_edit' destination.pk %}
+where the destionation.pk is the primary key of the destination

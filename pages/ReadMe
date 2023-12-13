@@ -1,0 +1,16 @@
+# Pages
+These pages are a small app that holds our Home Page, About Page, and Our Find Out More Page
+
+## Installation
+This app is installed with the forking of the repo, there is not additional packages needed specifically for this app
+
+## Usage
+
+# controls tagging within html
+{{ pages.blank }}
+
+# allows for implementation of urls in html
+{% url 'pages.blank' %}
+
+
+
