@@ -1,0 +1,24 @@
+# Attractions
+These attractions are an app built to be nested within 
+destinations in order to make the web app more user friendly
+and readable
+
+## Installation
+This app is installed with the forking of the repo, there is not additional packages needed specifically for this app
+
+## Usage
+
+# controls tagging within html
+{{ attractions.blank }}
+
+# allows for implementation of urls in html
+{% url 'attractions.blank' %}
+
+# gets specific destination's path to attraction
+{{ attraction.get_url }}
+
+# url specifics
+/attractions/ is blank, in order to visit a specific destionation's attraction list you will need to tag the url as 
+"{{ attraction.get_url }}/attractions/"
+thise will lead you to destinations/somehwere,someplace/attractions
+
