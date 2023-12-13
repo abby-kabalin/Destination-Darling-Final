@@ -13,6 +13,8 @@ class DestinationListView(LoginRequiredMixin, ListView):
     model = Destination
     template_name = "destination_list.html"
 
+    http_method_names = ["get", "post"]
+
 
 class CommentGet(DetailView):
     model = Destination
@@ -22,6 +24,8 @@ class CommentGet(DetailView):
         context = super().get_context_data(**kwargs)
         context["form"] = DestinationCommentForm()
         return context
+
+    http_method_names = ["get", "post"]
 
 
 class CommentPost(SingleObjectMixin, FormView):
@@ -44,6 +48,8 @@ class CommentPost(SingleObjectMixin, FormView):
         destination = self.object
         return reverse("destination_detail", kwargs={"pk": destination.pk})
 
+    http_method_names = ["get", "post"]
+
 
 class DestinationDetailView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -53,6 +59,8 @@ class DestinationDetailView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         view = CommentPost.as_view()
         return view(request, *args, **kwargs)
+
+    http_method_names = ["get", "post"]
 
 
 class DestinationUpdateView(LoginRequiredMixin, UpdateView):
@@ -69,6 +77,8 @@ class DestinationUpdateView(LoginRequiredMixin, UpdateView):
         obj = self.get_object()
         return obj.author == self.request.user
 
+    http_method_names = ["get", "post"]
+
 
 class DestinationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Destination
@@ -78,6 +88,8 @@ class DestinationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView)
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+
+    http_method_names = ["get", "post"]
 
 
 class DestinationCreateView(LoginRequiredMixin, CreateView):
@@ -93,3 +105,5 @@ class DestinationCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    http_method_names = ["get", "post"]
