@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.9-slim-bullseye
+ARG PYTHON_VERSION=3.10-slim-bullseye
 
 FROM python:${PYTHON_VERSION}
 
@@ -22,7 +22,7 @@ RUN set -ex && \
     rm -rf /root/.cache/
 COPY . /code
 
-ENV SECRET_KEY "TCmT9ocjS3F8EJqIYzSTWVecUTUAfqIKTY4E32DL5glu4eV5Tf"
+ENV SECRET_KEY "NDH6JpIiNPb2Nb3yDbxipP1FvxBHGCnPir3JmBYmgL0ixK6VRu"
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
