@@ -8,7 +8,7 @@ class HomePageTests(SimpleTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_homepage_view(self):
-        response = self.client.get(reverse("home"))
+        response = self.client.get(reverse("index"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "home.html")
-        self.assertContains(response, "Home")
+        self.assertTemplateUsed(response, "index.html")
+        self.assertContains(response, "Destination Darling")

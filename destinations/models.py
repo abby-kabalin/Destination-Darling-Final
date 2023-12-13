@@ -17,7 +17,7 @@ class Destination(models.Model):
         default="staticfiles/img/dest/no_image.jpg", upload_to="static/img/dest/"
     )
     rating = models.IntegerField(
-        blank=False, validators=[MaxValueValidator(5), MinValueValidator(1)]
+        default=3, validators=[MaxValueValidator(5), MinValueValidator(1)]
     )
     numberReviews = models.IntegerField(default=1)
 
