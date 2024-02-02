@@ -30,6 +30,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = [
+    "abby-kabalin/Destination-Darling-Final.github.io",
     "destination-darling-final.github.io",
     "www.destination-darling.com",
     "destination-darling-final.fly.dev",
@@ -37,6 +38,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 CSRF_TRUSTED_ORIGINS = [
+    "https://abby-kabalin/Destination-Darling-Final.github.io",
     "https://www.destination-darling.com",
     "https://destination-darling-final.fly.dev",
     "https://destination-darling-final.github.io",
